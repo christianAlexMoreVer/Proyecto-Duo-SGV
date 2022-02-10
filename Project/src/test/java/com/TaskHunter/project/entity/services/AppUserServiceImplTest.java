@@ -14,6 +14,27 @@ class AppUserServiceImplTest {
 	
 	@Autowired
     IAppUserDao AppUserDao;
+	
+	@Test
+	void getAllTest() {}
+	
+	@Test
+	void insertTest() {}
+	
+	@Test
+	void deleteTest() {}
+	
+	@Test
+	void updateTest() {}
+	
+	@Test
+	void findByIdTest() {}
+	
+	@Test
+	void loadUserByEmailTest() {}
+	
+	@Test
+    void findUserByUserNameTest() {}
 
     @Test
     void findUserByUserEmailTest() {
@@ -25,6 +46,13 @@ class AppUserServiceImplTest {
         resultFalse = this.AppUserDao.findByEmail("emailquenoexiste@gmail.com").isPresent();
         
         Assert.assertNotEquals( resultTrue, resultFalse );
+        
     }
+    
+    @Test
+    void findUserByUsernameLikeTest() {}
+    
+    
+    
 
 }

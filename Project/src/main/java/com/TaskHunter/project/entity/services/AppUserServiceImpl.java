@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 
 import com.TaskHunter.project.entity.dao.IAppUserDao;
+import com.TaskHunter.project.entity.dao.ICollectionDao;
 import com.TaskHunter.project.entity.models.AppUser;
 
 
@@ -20,14 +21,8 @@ import com.TaskHunter.project.entity.models.AppUser;
 public class AppUserServiceImpl implements IAppUserService  {
 
 
-	private final IAppUserDao AppUserDao;
-	
-	
 	@Autowired
-	public AppUserServiceImpl(IAppUserDao appUserDao) {
-		
-		AppUserDao = appUserDao;
-	}
+	private IAppUserDao AppUserDao;
 
 	@Override
 	public List<AppUser> getAll() {
