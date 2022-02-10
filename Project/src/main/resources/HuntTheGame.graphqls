@@ -1,0 +1,72 @@
+
+type AppUser {
+	idAppUser: ID!,
+	email: String,
+	password: String,
+	userName: String,
+	photo: String,
+	rol: Int
+}
+
+type VideoGame {
+	idVideoGame: ID!,
+	name: String,
+	photo: String
+}
+
+type Collection {
+
+  	idAppUser: ID!,
+    idVideoGame: ID!,
+    State: Int,
+    GameTime: Int
+    
+    }
+    
+    
+ type Mutation {
+ 	
+ 	InsertAppUser(email: String, password: String, userName:String , photo: String, img64: String): String
+ 	InsertAppUserWithOutImage( email: String, password: String, userName:String ) : String
+ 	InsertAdmin(email: String, password: String, userName:String, rol:Int) : String
+ 	UpdateAppUser(id:ID , email: String, password: String, userName:String, photo: String, img64: String): String
+ 	UpdateImgUser(id:ID , photo: String, img64: String): String
+ 	DeleteAppUser(id:ID) : String
+ 	
+ 	
+ 	InsertVideoGame(name:String, photo: String, img64: String) : String
+ 	InsertVideoGameWithOutImage(name:String) : String
+ 	UpdateVideoGame(id:ID, name:String) : String
+ 	UpdateVideoGameImage(id:ID, photo: String, img64: String) : String
+ 	DeleteVideoGame(id:ID): String
+ 	
+ 	InsertCollection(idAppUser: ID!, idVideoGame: ID!,State: Int, GameTime: Int  ):String
+ 	UpdateVideoGameInCollection(idAppUser: ID, idVideoGame: ID,State: Int, GameTime: Int  ):String
+ 	DeleteVideoGameInCollection(idAppUser: ID, idVideoGame: ID):String
+ 	CompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int  ):String
+ 	NotCompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int  ):String
+ 	
+ }
+ 
+ 
+ type Query {
+ 
+  Users: [AppUser],
+  User(id: ID): AppUser,
+  UserByUserNameLike(userName: String): [AppUser]
+  ExistUserName(UserName: String): Boolean,
+  ExistEmail(Email: String): Boolean,
+  Login(email: String, originalPassword: String): AppUser
+  
+  
+  Videogames: [VideoGame],
+  Videogame(id: ID): VideoGame,
+  ExistVideogame(name: String): Boolean,
+  VideogameByName(name: String): [VideoGame]
+  
+  
+  Collections: [Collection],
+  CollectionByIdUser(idUser: ID) : [Collection],
+  
+  
+}
