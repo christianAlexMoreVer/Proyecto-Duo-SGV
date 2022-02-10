@@ -1,10 +1,15 @@
 package com.TaskHunter.project.entity.services;
 
 import com.TaskHunter.project.entity.dao.IAppUserDao;
+import com.TaskHunter.project.entity.models.AppUser;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.util.List;
+
 import org.junit.Assert;
 
 @DataJpaTest
@@ -16,7 +21,14 @@ class AppUserServiceImplTest {
     IAppUserDao AppUserDao;
 	
 	@Test
-	void getAllTest() {}
+	void getAllTest() {
+		
+		boolean comprobacion;
+		List<AppUser> users = (List<AppUser>) AppUserDao.findAll();
+		comprobacion = users.size() == 2;
+		Assert.assertEquals(comprobacion, true);
+		
+	}
 	
 	@Test
 	void insertTest() {}
