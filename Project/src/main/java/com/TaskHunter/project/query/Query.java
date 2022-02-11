@@ -60,29 +60,30 @@ public class Query implements GraphQLQueryResolver {
 	public boolean getExistUserName(String userName) {
 
 		return AppUserService.findUserByUserName(userName);
-			
-		
+
 	}
-	
+
 	public boolean getExistEmail(String email) {
 
 		return AppUserService.findUserByUserEmail(email);
 
-	
 	}
-	
-public Optional<AppUser> getLogin(String email, String originalPassword) {
-		
-		AppUser loginUser = AppUserService.loadUserByEmail(email);
-		
-		if(encryptService.verifyPassword(originalPassword, loginUser.getPassword())) {
-			return AppUserService.findById( loginUser.getIdAppUser());
-		}
-		else {
-			
+
+	public Optional<AppUser> getLogin(String email, String originalPassword) {
+
+		try {
+			AppUser loginUser = AppUserService.loadUserByEmail(email);
+
+			if (encryptService.verifyPassword(originalPassword, loginUser.getPassword())) {
+				return AppUserService.findById(loginUser.getIdAppUser());
+			} else {
+
+				return null;
+			}
+		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
 
 	// ----------------------VideoGame----------------------------------------------
@@ -94,19 +95,17 @@ public Optional<AppUser> getLogin(String email, String originalPassword) {
 	public Optional<VideoGame> getVideogame(long id) {
 		return VideoGameService.findById(id);
 	}
-	
-	public boolean getExistVideogame(String name){
-		
-		 return VideoGameService.findByName(name);
-		
+
+	public boolean getExistVideogame(String name) {
+
+		return VideoGameService.findByName(name);
 
 	}
-	
 
-	public List<VideoGame> getVideogameByName(String name){
+	public List<VideoGame> getVideogameByName(String name) {
 
-	return VideoGameService.findVideoGameByNameContaining(name);
-	
+		return VideoGameService.findVideoGameByNameContaining(name);
+
 	}
 
 	// --------------------------Collection------------------------------------------
