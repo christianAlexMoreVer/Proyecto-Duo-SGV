@@ -98,6 +98,25 @@ public class Mutation implements GraphQLMutationResolver{
 		return "Se ha actualizado";
 	}
 	
+public String UpdateAppUserWithOutImage(Long id, String email, String password , String userName) {
+		
+		AppUser user = new AppUser();
+		
+		user.setemail(email);
+		user.setPassword(password);
+		user.setuserName(userName);
+	
+		
+		if(user.getPassword() != null) {
+			String hashPass = encryptService.encryptPassword(user.getPassword());
+			user.setPassword(hashPass);
+		}
+		
+		AppUserService.update(user, id);
+		
+		return "Se ha actualizado";
+	}
+	
 public String UpdateImgUser(Long id, String imgFileName ,String img64 )throws IOException {
 		AppUser user = new AppUser(imgFileName);
 		String processedImg64 = img64.substring(img64.indexOf(",")+1);

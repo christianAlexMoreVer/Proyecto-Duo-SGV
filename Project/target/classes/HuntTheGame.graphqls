@@ -30,6 +30,7 @@ type Collection {
  	InsertAppUserWithOutImage( email: String, password: String, userName:String ) : String
  	InsertAdmin(email: String, password: String, userName:String, rol:Int) : String
  	UpdateAppUser(id:ID , email: String, password: String, userName:String, photo: String, img64: String): String
+ 	UpdateAppUserWithOutImage(id:ID , email: String, password: String, userName:String): String
  	UpdateImgUser(id:ID , photo: String, img64: String): String
  	DeleteAppUser(id:ID) : String
  	

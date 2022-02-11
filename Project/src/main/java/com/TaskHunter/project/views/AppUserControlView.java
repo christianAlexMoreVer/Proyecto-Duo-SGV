@@ -1,8 +1,10 @@
 package com.TaskHunter.project.views;
 
 import com.TaskHunter.project.entity.models.AppUser;
+import com.TaskHunter.project.mutation.Mutation;
 import com.TaskHunter.project.query.Query;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -20,7 +22,13 @@ public class AppUserControlView extends VerticalLayout{
     private Grid<AppUser> grid = new Grid<>(AppUser.class);
     private TextField filterText = new TextField();
     
-    public AppUserControlView(Query service) {
+   
+    
+    public AppUserControlView(Mutation mutationService, Query service) {
+    	
+    	AppUserFormModifyView form = new AppUserFormModifyView(this, mutationService, service  );
+    	
+    	HorizontalLayout mainContent = new HorizontalLayout(grid, form );
     	
     	filterText.setPlaceholder("Filter by username");
         filterText.setClearButtonVisible(true);
@@ -28,15 +36,19 @@ public class AppUserControlView extends VerticalLayout{
         filterText.setValueChangeMode(ValueChangeMode.EAGER);
         filterText.addValueChangeListener(e -> updateList(service));
     	
-    	grid.setColumns("idAppUser", "email", "password", "userName", "photo", "rol");
+    	grid.setColumns("idAppUser", "email", "password", "userName", "rol");
     	
-    	
+    	mainContent.setSizeFull();
+    	form.setAppUser(null);
 
-        add(filterText, grid);
+        add(filterText, mainContent);
 
-        setSizeFull();
         
         updateList(service);
+        
+        
+        grid.asSingleSelect().addValueChangeListener(event ->
+        form.setAppUser(grid.asSingleSelect().getValue()));
     }
     
     public void updateList(Query service) {
