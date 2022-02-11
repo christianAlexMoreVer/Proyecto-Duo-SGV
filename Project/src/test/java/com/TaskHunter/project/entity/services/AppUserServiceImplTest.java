@@ -31,22 +31,81 @@ class AppUserServiceImplTest {
 	}
 	
 	@Test
-	void insertTest() {}
+	void insertTest() {
+		
+		boolean comprobacion;
+		AppUser user = new AppUser("correo@gmail.com", "password", "test");
+		AppUserDao.save(user);
+		comprobacion = AppUserDao.findByEmail("correo@gmail.com").isPresent();
+		Assert.assertEquals(comprobacion, true);
+		AppUserDao.delete(user);
+		
+	}
 	
 	@Test
-	void deleteTest() {}
+	void deleteTest() {
+		
+		boolean comprobacion;
+		AppUser user = new AppUser("correo@gmail.com", "password", "test");
+		AppUserDao.save(user);
+		AppUserDao.delete(user);
+		comprobacion = AppUserDao.findByEmail("correo@gmail.com").isPresent();
+		Assert.assertEquals(comprobacion, false);
+		
+	}
 	
 	@Test
-	void updateTest() {}
+	void updateTest() {
+		
+		boolean comprobacion;
+		AppUser user = new AppUser("correo@gmail.com", "password", "test");
+		AppUserDao.save(user);
+		AppUser userGet = AppUserDao.findByEmail("correo@gmail.com").get();
+		userGet.setemail("Cambiado@gmail.com");
+		userGet.setPassword("Cambiado");
+		userGet.setuserName("Cambiado");
+		userGet.setphoto(null);
+		comprobacion = AppUserDao.findByEmail("Cambiado@gmail.com").isPresent();
+		Assert.assertEquals(comprobacion, true);
+		AppUserDao.delete(userGet);
+		
+	}
 	
 	@Test
-	void findByIdTest() {}
+	void findByIdTest() {
+		
+		boolean comprobacion;
+		long id = (long) 1;
+		comprobacion = this.AppUserDao.findById(id).isPresent();
+		Assert.assertEquals(comprobacion, true);
+		
+	}
 	
 	@Test
-	void loadUserByEmailTest() {}
+	void loadUserByEmailTest() {
+		
+		boolean resultTrue;
+        resultTrue = this.AppUserDao.findByEmail("loloeladmin@gmail.com").isPresent();
+        
+        boolean resultFalse;
+        resultFalse = this.AppUserDao.findByEmail("emailquenoexiste@gmail.com").isPresent();
+        
+        Assert.assertNotEquals( resultTrue, resultFalse );
+		
+	}
 	
 	@Test
-    void findUserByUserNameTest() {}
+    void findUserByUserNameTest() {
+		
+		 	boolean resultTrue;
+	        resultTrue = this.AppUserDao.findByuserName("NaelAdmin").isPresent();;
+	        
+	        boolean resultFalse;
+	        resultFalse = this.AppUserDao.findByuserName("NaelAdminNoExisto").isPresent();;
+	        
+	        Assert.assertNotEquals( resultTrue, resultFalse );
+		
+	}
 
     @Test
     void findUserByUserEmailTest() {
@@ -62,7 +121,21 @@ class AppUserServiceImplTest {
     }
     
     @Test
-    void findUserByUsernameLikeTest() {}
+    void findUserByUsernameLikeTest() {
+    	
+    	List<AppUser> Users = AppUserDao.findUserByuserNameContaining("Nael");
+		int position = 0;
+		for (AppUser appUser : Users) {
+			if(appUser.getRol() == 1) {
+				Users.remove(position);
+				break;
+			}
+			else {
+				position++;
+			}	
+		}
+		Assert.assertEquals(Users.size(), 1);
+    }
     
     
     
