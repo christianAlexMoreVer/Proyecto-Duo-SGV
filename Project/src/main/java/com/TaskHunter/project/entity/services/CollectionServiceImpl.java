@@ -35,16 +35,10 @@ public class CollectionServiceImpl implements ICollectionService {
 
 		}catch ( Exception e){
 			System.out.println("ERROR");
-			CollectionDao.save(collection);
 		}
 		
 		
 		
-	}
-
-	@Override
-	public Object findById(Long id) {
-		return CollectionDao.findById(id);
 	}
 
 	@Override
