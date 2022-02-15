@@ -5,6 +5,8 @@ import java.util.Optional;
 import com.TaskHunter.project.entity.models.AppUser;
 import com.TaskHunter.project.entity.services.AppUserServiceImpl;
 import com.TaskHunter.project.query.Query;
+import com.TaskHunter.project.utils.LocalStorage;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.HtmlImport;
@@ -22,15 +24,23 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.PWA;
+
 import java.util.Objects;
 
 @Route(value = "")
 @PageTitle("Login")
+
 public class LoginView extends VerticalLayout {
+	
+	
+	static Boolean logged;
 
 	private final LoginForm login = new LoginForm(); 
 
-	public LoginView(Query service){
+	public LoginView(LocalStorage localStorage, Query service){
+		
+	
 		
 		LoginOverlay loginOverlay = new LoginOverlay();
 		loginOverlay.setTitle("Hunt The Game");
@@ -46,9 +56,12 @@ public class LoginView extends VerticalLayout {
 		setAlignItems(Alignment.CENTER);
 		setJustifyContentMode(JustifyContentMode.CENTER);
 		
-
+	
 		
+	
 		loginOverlay.addLoginListener( event -> {
+			
+			
 
 			Optional<AppUser> us = service.getLogin(event.getUsername(), event.getPassword());
 			
@@ -56,16 +69,27 @@ public class LoginView extends VerticalLayout {
 			if(Objects.isNull(us)) {
 				loginOverlay.setError(true);
 			}else {
-				loginOverlay.setError(false);
-				System.out.println(us.get().getuserName());
-				loginOverlay.getUI().ifPresent(ui -> ui.navigate("AppUserControl"));
+				if(us.get().getRol() == 1) {
+					loginOverlay.setError(false);
+					System.out.println(us.get().getuserName());
+					
+					localStorage.setLogin("true");
+					// loginOverlay.getUI().ifPresent(ui -> ui.navigate("AppUserControl"));
+					UI.getCurrent().navigate("AppUserControl");
+					
+				}else {
+					loginOverlay.setError(true);
+				}
+				
 			}
 			
-
+			
+			
 		});
-		
+
 		add(loginOverlay);
 		loginOverlay.setOpened(true);
+		
 				
 	}
 	
@@ -73,10 +97,21 @@ public class LoginView extends VerticalLayout {
 		LoginI18n i18n = LoginI18n.createDefault();
 		
 		
-	    i18n.getForm().setUsername("Email"); // this is the one you asked for.
+	    i18n.getForm().setUsername("Email"); 
 	    i18n.getErrorMessage().setTitle("Incorrect email or password");
 	    
 	    return i18n;
 	}
+
+	public static Boolean getLogged() {
+		return logged;
+	}
+
+	public static void setLogged(Boolean logged) {
+		LoginView.logged = logged;
+	}
+	
+	
+	
 }
 
