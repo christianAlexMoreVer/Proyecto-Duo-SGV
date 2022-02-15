@@ -24,6 +24,7 @@ type Collection {
     }
     
     
+    
  type Mutation {
  	
  	InsertAppUser(email: String, password: String, userName:String , photo: String, img64: String): String
@@ -47,6 +48,8 @@ type Collection {
  	CompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int  ):String
  	NotCompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int  ):String
  	
+ç
+ 	
  }
  
  
@@ -68,6 +71,8 @@ type Collection {
   
   Collections: [Collection],
   CollectionByIdUser(idUser: ID) : [Collection],
+  
+
   
   
 }

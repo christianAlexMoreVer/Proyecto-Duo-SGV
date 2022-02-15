@@ -3,6 +3,7 @@ package com.TaskHunter.project.query;
 import com.TaskHunter.project.entity.dao.ICollectionDao;
 import com.TaskHunter.project.entity.models.AppUser;
 import com.TaskHunter.project.entity.models.Collection;
+import com.TaskHunter.project.entity.models.Music;
 import com.TaskHunter.project.entity.models.VideoGame;
 import com.TaskHunter.project.entity.services.AppUserServiceImpl;
 import com.TaskHunter.project.entity.services.EncryptService;
@@ -117,7 +118,14 @@ public class Query implements GraphQLQueryResolver {
 	public List<Collection> getCollections() {
 		return CollectionService.getAll();
 	}
-
+	
+	// --------------------------Music------------------------------------------
+	
+	
+	public Optional<Music> GetMusicBackground(){
+		return "tu madre";
+	}
+	
 	// --------------------------------------------------------------------------
 
 }

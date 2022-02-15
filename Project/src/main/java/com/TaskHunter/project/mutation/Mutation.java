@@ -21,6 +21,7 @@ import com.TaskHunter.project.entity.models.VideoGame;
 import com.TaskHunter.project.entity.services.EncryptService;
 import com.TaskHunter.project.entity.services.IAppUserService;
 import com.TaskHunter.project.entity.services.ICollectionService;
+import com.TaskHunter.project.entity.services.IMusicService;
 import com.TaskHunter.project.entity.services.IVideoGameService;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 
@@ -38,6 +39,9 @@ public class Mutation implements GraphQLMutationResolver{
 
 	@Autowired
 	ICollectionService CollectionService;
+	
+	@Autowired
+	IMusicService MusicService;
 
 	
 	// -----------------------------AppUser------------------------------------------
@@ -254,6 +258,24 @@ public String NotCompleteVideoGame ( long idAppUser, long idVideoGame, int GameT
 	
 	return "Se ha actualizado el estado del videojuego de la colección";
 }
+
+//--------------------------Music------------------------------------------
+
+public String UpdateMusic (long idMusic, String MusicBackground, String MusicFile ) {
+	
+	return "Se ha actualizado el estado de la musica correctamente";
+}
+
+public String InsertMusic ( String MusicBackground, String MusicFile) {
+	
+	return "Se ha introducido la música correctamente";
+}
+
+public String DeleteMusic ( long idMusic) {
+	
+	return "Se ha borrado la música correctamente";
+}
+
 
 //-----------------------------------------------------------------------------
 

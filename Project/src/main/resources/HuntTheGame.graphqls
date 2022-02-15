@@ -23,6 +23,13 @@ type Collection {
     
     }
     
+type Music {
+	
+	idMusic: ID!
+	BackgroundMusic: String	
+    InUse: Int
+}
+    
     
  type Mutation {
  	
@@ -34,18 +41,21 @@ type Collection {
  	UpdateImgUser(id:ID , photo: String, img64: String): String
  	DeleteAppUser(id:ID) : String
  	
- 	
  	InsertVideoGame(name:String, photo: String, img64: String) : String
  	InsertVideoGameWithOutImage(name:String) : String
  	UpdateVideoGame(id:ID, name:String) : String
  	UpdateVideoGameImage(id:ID, photo: String, img64: String) : String
  	DeleteVideoGame(id:ID): String
  	
- 	InsertCollection(idAppUser: ID!, idVideoGame: ID!,State: Int, GameTime: Int  ):String
- 	UpdateVideoGameInCollection(idAppUser: ID, idVideoGame: ID,State: Int, GameTime: Int  ):String
+ 	InsertCollection(idAppUser: ID!, idVideoGame: ID!,State: Int, GameTime: Int):String
+ 	UpdateVideoGameInCollection(idAppUser: ID, idVideoGame: ID,State: Int, GameTime: Int):String
  	DeleteVideoGameInCollection(idAppUser: ID, idVideoGame: ID):String
- 	CompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int  ):String
- 	NotCompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int  ):String
+ 	CompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int):String
+ 	NotCompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int):String
+ 	
+ 	UpdateMusic(idMusic: ID!, MusicBackground: String, MusicFile: String): String
+ 	InsertMusic(MusicBackground: String, MusicFile: String): String
+ 	DeleteMusic(idMusic: ID!): String
  	
  }
  
@@ -68,6 +78,8 @@ type Collection {
   
   Collections: [Collection],
   CollectionByIdUser(idUser: ID) : [Collection],
+  
+  MusicBackground: Music
   
   
 }
