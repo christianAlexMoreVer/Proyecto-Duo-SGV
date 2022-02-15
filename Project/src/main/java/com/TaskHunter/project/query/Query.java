@@ -1,6 +1,7 @@
 package com.TaskHunter.project.query;
 
 import com.TaskHunter.project.entity.dao.ICollectionDao;
+import com.TaskHunter.project.entity.dao.IMusicDao;
 import com.TaskHunter.project.entity.models.AppUser;
 import com.TaskHunter.project.entity.models.Collection;
 import com.TaskHunter.project.entity.models.Music;
@@ -41,6 +42,9 @@ public class Query implements GraphQLQueryResolver {
 
 	@Autowired
 	ICollectionDao CollectionDao;
+	
+	@Autowired
+	IMusicDao MusicDao;
 
 	// ---------------------AppUser-----------------------------------------
 
@@ -122,8 +126,8 @@ public class Query implements GraphQLQueryResolver {
 	// --------------------------Music------------------------------------------
 	
 	
-	public Optional<Music> GetMusicBackground(){
-		return "tu madre";
+	public Music getMusicBackground(String backgroundMusic){
+		return MusicDao.findMusicByBackgroundMusic(backgroundMusic);
 	}
 	
 	// --------------------------------------------------------------------------

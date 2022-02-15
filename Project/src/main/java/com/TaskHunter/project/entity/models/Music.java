@@ -18,20 +18,20 @@ public class Music implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idMusic;
 	
-	private String BackgroundMusic;
+	private String backgroundMusic;
 	private boolean InUse;
 	 
 	public Music(String backgroundMusic) {
 		super();
-		BackgroundMusic = backgroundMusic;
+		backgroundMusic = backgroundMusic;
 	}
 
 	public String getBackgroundMusic() {
-		return BackgroundMusic;
+		return backgroundMusic;
 	}
 
 	public void setBackgroundMusic(String backgroundMusic) {
-		BackgroundMusic = backgroundMusic;
+		backgroundMusic = backgroundMusic;
 	}
 
 	public long getIdMusic() {

@@ -79,7 +79,7 @@ type Music {
   Collections: [Collection],
   CollectionByIdUser(idUser: ID) : [Collection],
   
-  MusicBackground: Music
+  MusicBackground(name: String): Music
   
   
 }
