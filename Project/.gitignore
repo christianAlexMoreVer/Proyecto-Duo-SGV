@@ -2,7 +2,14 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
 
+<<<<<<< HEAD
 ### Eclipse and intellj ###
+=======
+
+
+.idea
+### Eclipse ###
+>>>>>>> 12c41f33bf427b3b199da7a00c5896747a5f7dc7
 .metadata
 .idea
 bin/

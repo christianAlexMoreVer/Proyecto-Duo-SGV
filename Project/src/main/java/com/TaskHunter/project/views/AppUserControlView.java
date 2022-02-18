@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @Route(value = "AppUserControl")
 @PageTitle("AppUserControl")
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class AppUserControlView extends VerticalLayout{
 
     private Grid<AppUser> grid = new Grid<>(AppUser.class);
@@ -102,6 +103,8 @@ public class AppUserControlView extends VerticalLayout{
     }
 }
 =======
+=======
+>>>>>>> 12c41f33bf427b3b199da7a00c5896747a5f7dc7
 public class AppUserControlView extends VerticalLayout {
 
 	private Grid<AppUser> grid = new Grid<>(AppUser.class);
@@ -139,6 +142,7 @@ public class AppUserControlView extends VerticalLayout {
 
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("1", "1");
+<<<<<<< HEAD
 
 			JasperReport compileReport;
 			try {
@@ -153,6 +157,21 @@ public class AppUserControlView extends VerticalLayout {
 				// JasperExportManager.exportReportToPdfFile(jasperPrint,
 				// System.currentTimeMillis() + ".pdf");
 
+=======
+
+			JasperReport compileReport;
+			try {
+				compileReport = JasperCompileManager
+						.compileReport(new FileInputStream("src/main/resources/static/report/report.jrxml"));
+				JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, parameters,
+						beanCollectionDataSource);
+
+				JasperExportManager.exportReportToHtmlFile(jasperPrint, "src/main/resources/static/report/report.html");
+				JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/resources/static/report/report.pdf");
+				// JasperExportManager.exportReportToPdfFile(jasperPrint,
+				// System.currentTimeMillis() + ".pdf");
+
+>>>>>>> 12c41f33bf427b3b199da7a00c5896747a5f7dc7
 				byte data[] = JasperExportManager.exportReportToPdf(jasperPrint);
 				
 				UI.getCurrent().getPage().open("/report/report.pdf");
