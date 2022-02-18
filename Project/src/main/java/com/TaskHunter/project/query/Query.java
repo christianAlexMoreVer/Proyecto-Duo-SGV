@@ -6,6 +6,7 @@ import com.TaskHunter.project.entity.models.AppUser;
 import com.TaskHunter.project.entity.models.Collection;
 import com.TaskHunter.project.entity.models.Music;
 import com.TaskHunter.project.entity.models.VideoGame;
+import com.TaskHunter.project.entity.models.VideoGameInCollection;
 import com.TaskHunter.project.entity.services.AppUserServiceImpl;
 import com.TaskHunter.project.entity.services.EncryptService;
 import com.TaskHunter.project.entity.services.IAppUserService;
@@ -13,6 +14,7 @@ import com.TaskHunter.project.entity.services.ICollectionService;
 import com.TaskHunter.project.entity.services.IVideoGameService;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -96,6 +98,40 @@ public class Query implements GraphQLQueryResolver {
 	public List<VideoGame> getVideogames() {
 		return VideoGameService.getAll();
 	}
+	
+	public List<VideoGameInCollection> getVideogamesInCollection() {
+		List<VideoGame> games =  VideoGameService.getAll();
+		VideoGameInCollection gameCollect;
+		List<VideoGameInCollection> gamesCollectList = new ArrayList<VideoGameInCollection>();
+		List<Collection> allCollection = CollectionService.getAll();
+		
+		
+		
+		for (VideoGame videoGame : games) {
+			
+			Integer inCollect = 0;
+			Integer notInCollect = 0;
+			
+			gameCollect = new VideoGameInCollection(videoGame.getName(), videoGame.getPhoto());
+			for (Collection collection : allCollection) {
+				if(collection.getIdVideoGame() == videoGame.getIdVideoGame()) {
+					inCollect++;
+				}else {
+					notInCollect ++;
+				}
+			}
+
+			gameCollect.setInCollection(inCollect);
+			gameCollect.setInNotCollection(notInCollect);
+			if(inCollect != 0) {
+				gamesCollectList.add(gameCollect);
+			}
+			
+		}
+		
+		return gamesCollectList;
+	}
+	
 
 	public Optional<VideoGame> getVideogame(long id) {
 		return VideoGameService.findById(id);
@@ -112,6 +148,8 @@ public class Query implements GraphQLQueryResolver {
 		return VideoGameService.findVideoGameByNameContaining(name);
 
 	}
+	
+	
 
 	// --------------------------Collection------------------------------------------
 

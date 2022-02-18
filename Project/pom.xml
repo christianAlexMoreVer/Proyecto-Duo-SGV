@@ -21,6 +21,7 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
+<<<<<<< HEAD
 
     <dependencies>
 
@@ -34,6 +35,21 @@
             <artifactId>jasperreports-fonts</artifactId>
             <version>6.0.0</version>
         </dependency>
+=======
+	
+	<dependencies>
+	
+	<dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports</artifactId>
+        <version>6.3.1</version>
+    </dependency>
+    <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports-fonts</artifactId>
+        <version>6.0.0</version>
+    </dependency>
+>>>>>>> fa62e6881cf13bde72bbc8804a16a91c9ba7d7cc
 
 
         <dependency>
