@@ -22,18 +22,16 @@ import com.vaadin.flow.server.PWA;
 @Route(value = "AppUserControl")
 @PageTitle("AppUserControl")
 public class AppUserControlView extends VerticalLayout{
-	
-
 
     private Grid<AppUser> grid = new Grid<>(AppUser.class);
     private TextField filterText = new TextField();
-   
     
     public AppUserControlView(LocalStorage localStorage, Mutation mutationService, Query service) {
     	
     	grid.setVisible(false);
     	checkLogin(localStorage);
-    	
+
+
     	AppUserFormView form = new AppUserFormView(this, mutationService, service  );
     	
     	
