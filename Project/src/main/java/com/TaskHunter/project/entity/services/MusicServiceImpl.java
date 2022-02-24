@@ -6,15 +6,36 @@ import org.springframework.stereotype.Service;
 import com.TaskHunter.project.entity.dao.IMusicDao;
 import com.TaskHunter.project.entity.models.Music;
 
+import java.util.List;
+
 @Service
 public class MusicServiceImpl implements IMusicService {
 	
 	@Autowired
 	private IMusicDao MusicDao;
-	
+
 	@Override
-	public Music MusicBackground(String MusicName) {
+	public List<Music> getAll() {
+		return (List<Music>) MusicDao.findAll();
+	}
+
+	@Override
+	public Music MusicBackgroundByName(String MusicName) {
 		return MusicDao.findMusicByBackgroundMusic(MusicName);
+	}
+
+	@Override
+	public Music MusicBackgroundByInUse() {
+		return MusicDao.findMusicByInUse(1);
+	}
+
+	@Override
+	public boolean findByMusicBackground(String MusicName) {
+		if (MusicName.equals(MusicDao.findMusicByBackgroundMusic(MusicName).getBackgroundMusic()) == true){
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override

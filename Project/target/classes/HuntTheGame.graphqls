@@ -43,6 +43,7 @@ type Music {
  	
  	InsertVideoGame(name:String, photo: String, img64: String) : String
  	InsertVideoGameWithOutImage(name:String) : String
+ 	UpdateVideoWithGameImage(id:ID, name:String, photo: String, img64: String): String
  	UpdateVideoGame(id:ID, name:String) : String
  	UpdateVideoGameImage(id:ID, photo: String, img64: String) : String
  	DeleteVideoGame(id:ID): String
@@ -52,8 +53,9 @@ type Music {
  	DeleteVideoGameInCollection(idAppUser: ID, idVideoGame: ID):String
  	CompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int):String
  	NotCompleteVideoGame(idAppUser: ID!, idVideoGame: ID,GameTime: Int):String
- 	
- 	UpdateMusic(idMusic: ID!, MusicBackground: String, MusicFile: String): String
+
+ 	UpdateMusicWithoutImage(idMusic: ID!, MusicBackground: String, inUse: Int): String
+ 	UpdateMusic(idMusic: ID!, MusicBackground: String, MusicFile: String, inUse: Int): String
  	InsertMusic(MusicBackground: String, MusicFile: String): String
  	DeleteMusic(idMusic: ID!): String
  	
@@ -78,8 +80,13 @@ type Music {
   
   Collections: [Collection],
   CollectionByIdUser(idUser: ID) : [Collection],
-  
-  MusicBackground(name: String): Music
+
+  Music(id: ID): Music
+  Musics: [Music]
+  ExistMusic(name: String): Boolean
+  MusicBackgroundByName(name: String): Music
+  MusicBackgroundByNameContaining(name: String): [Music]
+  MusicBackgroundInUse: Music
   
   
 }

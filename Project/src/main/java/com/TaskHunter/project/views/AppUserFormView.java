@@ -1,7 +1,6 @@
 package com.TaskHunter.project.views;
 
-import java.io.IOException;
-import java.util.Objects;
+
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,8 +14,6 @@ import com.TaskHunter.project.query.Query;
 import com.vaadin.flow.component.HasValueAndElement;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -95,24 +92,24 @@ public class AppUserFormView extends FormLayout {
 
 			if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
 				errores++;
-				errorMessageField.add("Falta algún campo por rellenar | ");
+				errorMessageField.add("Falta algï¿½n campo por rellenar | ");
 			}
 
 			if (mather.find() == true && (!queryService.getExistEmail(email.getValue()))) {
-				System.out.println("El email ingresado es válido.");
+				System.out.println("El email ingresado es vï¿½lido.");
 			} else {
-				errorMessageField.add("El email ingresado no es válido o ya existe | ");
+				errorMessageField.add("El email ingresado no es vï¿½lido o ya existe | ");
 				errores++;
 			}
 
 			if (password.getValue().length() < 8 || password.getValue().length() > 16) {
-				errorMessageField.add("La contraseña no tiene la longitud adecuada | ");
+				errorMessageField.add("La contraseï¿½a no tiene la longitud adecuada | ");
 				errores++;
 			}
 
 			if (queryService.getExistUserName(userName.getValue())
 					|| (userName.getValue().length() < 2 || userName.getValue().length() > 16)) {
-				errorMessageField.add("El nombre de usuario ingresado no es válido o ya existe ");
+				errorMessageField.add("El nombre de usuario ingresado no es vï¿½lido o ya existe ");
 				errores++;
 			}
 
@@ -158,13 +155,13 @@ public class AppUserFormView extends FormLayout {
 			}
 
 			if (mather.find() == true && (!queryService.getExistEmail(email.getValue()))) {
-				System.out.println("El email ingresado es válido.");
+				System.out.println("El email ingresado es vï¿½lido.");
 			} else {
 				if(user.getemail().equals(beforeUser.get().getemail())) {
-					System.out.println("El email ingresado es válido.");
+					System.out.println("El email ingresado es vï¿½lido.");
 				}else {
 					System.out.println(beforeUser.get().getemail());
-					errorMessageField.add("El email ingresado no es válido | ");
+					errorMessageField.add("El email ingresado no es vï¿½lido | ");
 					errores++;
 				}
 				
@@ -174,7 +171,7 @@ public class AppUserFormView extends FormLayout {
 				if(user.getPassword().equals(beforeUser.get().getPassword())) {
 					System.out.println("La password esta ok.");
 				}else {
-					errorMessageField.add("La contraseña no tiene la longitud adecuada | ");
+					errorMessageField.add("La contraseï¿½a no tiene la longitud adecuada | ");
 					errores++;
 				}
 				
@@ -185,7 +182,7 @@ public class AppUserFormView extends FormLayout {
 				if(user.getuserName().equals(beforeUser.get().getuserName())) {
 					System.out.println("Username ok");
 				}else {
-					errorMessageField.add("El nombre de usuario ingresado no es válido o ya existe ");
+					errorMessageField.add("El nombre de usuario ingresado no es vï¿½lido o ya existe ");
 					errores++;
 				}
 			}

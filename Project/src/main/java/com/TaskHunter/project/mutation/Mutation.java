@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 
+import com.TaskHunter.project.entity.models.Music;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -187,7 +188,24 @@ public String UpdateImgUser(Long id, String imgFileName ,String img64 )throws IO
 			VideoGameService.update(videogame, id);
 			
 			return "Se ha actualizado el juego";
-		}
+	}
+
+	public String UpdateVideoWithGameImage(int id, String name,String imgFileName, String img64)throws IOException {
+
+		VideoGame videogame = new VideoGame();
+
+		videogame.setPhoto(imgFileName);
+		videogame.setName(name);
+		String processedImg64 = img64.substring(img64.indexOf(",")+1);
+		Decoder dec= Base64.getDecoder();
+		OutputStream OS= null;
+		byte[] fileBytes = dec.decode(processedImg64);
+		OS = new FileOutputStream(new File("src/main/resources/static/img/Videogames", imgFileName));
+		OS.write(fileBytes);
+		VideoGameService.update(videogame, id);
+
+		return "Se ha actualizado el juego";
+	}
 	
 	public String UpdateVideoGame(int id, String name) {
 		
@@ -261,17 +279,44 @@ public String NotCompleteVideoGame ( long idAppUser, long idVideoGame, int GameT
 
 //--------------------------Music------------------------------------------
 
-public String UpdateMusic (long idMusic, String MusicBackground, String MusicFile ) {
-	
+	public String UpdateMusicWithoutImage (long idMusic, String MusicBackground, int inUse )throws IOException {
+
+		Music music = new Music(MusicBackground, inUse);
+		MusicService.UpdateMusic(music, idMusic);
+
+		return "Se ha actualizado el estado de la musica correctamente";
+	}
+
+	public String UpdateMusic (long idMusic, String MusicBackground, String MusicFile, int inUse )throws IOException {
+
+	Music music = new Music(MusicBackground, inUse);
+	Decoder dec= Base64.getDecoder();
+	OutputStream OS= null;
+	byte[] fileBytes = dec.decode(MusicFile);
+	OS = new FileOutputStream(new File("src/main/resources/static/mediaFiles/", MusicBackground));
+	OS.write(fileBytes);
+
+	MusicService.UpdateMusic(music, idMusic);
+
 	return "Se ha actualizado el estado de la musica correctamente";
 }
 
-public String InsertMusic ( String MusicBackground, String MusicFile) {
-	
+	public String InsertMusic ( String MusicBackground, String MusicFile)throws IOException {
+
+	Music music = new Music(MusicBackground, 0);
+	Decoder dec= Base64.getDecoder();
+	OutputStream OS= null;
+	byte[] fileBytes = dec.decode(MusicFile);
+	OS = new FileOutputStream(new File("src/main/resources/static/mediaFiles/", MusicBackground));
+	OS.write(fileBytes);
+	MusicService.InsertMusic(music);
+
 	return "Se ha introducido la música correctamente";
 }
 
-public String DeleteMusic ( long idMusic) {
+	public String DeleteMusic ( long idMusic) {
+
+	MusicService.DeleteMusic(idMusic);
 	
 	return "Se ha borrado la música correctamente";
 }

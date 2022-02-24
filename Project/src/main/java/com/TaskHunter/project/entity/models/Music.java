@@ -1,6 +1,7 @@
 package com.TaskHunter.project.entity.models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,14 +20,23 @@ public class Music implements Serializable{
     private long idMusic;
 	
 	private String backgroundMusic;
-	private boolean InUse;
-	 
+	private int inUse;
+
 	public Music(String backgroundMusic) {
 		super();
-		backgroundMusic = backgroundMusic;
+		this.backgroundMusic = backgroundMusic;
 	}
 
-	public String getBackgroundMusic() {
+	public Music() {}
+
+    public Music(String musicBackground, int inUse) {
+		super();
+		this.backgroundMusic = musicBackground;
+		this.inUse = inUse;
+    }
+
+
+    public String getBackgroundMusic() {
 		return backgroundMusic;
 	}
 
@@ -42,16 +52,13 @@ public class Music implements Serializable{
 		this.idMusic = idMusic;
 	}
 
-	public boolean getInUse() {
-		return InUse;
+	public int getInUse() {
+		return inUse;
 	}
 
-	public void setInUse(boolean inUse) {
-		InUse = inUse;
+	public void setInUse(int inUse) {
+		this.inUse = inUse;
 	}
-	
-	
-	 
-	 
-	
+
+
 }

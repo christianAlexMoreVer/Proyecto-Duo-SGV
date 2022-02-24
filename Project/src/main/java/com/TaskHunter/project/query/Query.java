@@ -7,11 +7,7 @@ import com.TaskHunter.project.entity.models.Collection;
 import com.TaskHunter.project.entity.models.Music;
 import com.TaskHunter.project.entity.models.VideoGame;
 import com.TaskHunter.project.entity.models.VideoGameInCollection;
-import com.TaskHunter.project.entity.services.AppUserServiceImpl;
-import com.TaskHunter.project.entity.services.EncryptService;
-import com.TaskHunter.project.entity.services.IAppUserService;
-import com.TaskHunter.project.entity.services.ICollectionService;
-import com.TaskHunter.project.entity.services.IVideoGameService;
+import com.TaskHunter.project.entity.services.*;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 
 import java.util.ArrayList;
@@ -47,6 +43,9 @@ public class Query implements GraphQLQueryResolver {
 	
 	@Autowired
 	IMusicDao MusicDao;
+
+	@Autowired
+	IMusicService MusicService;
 
 	// ---------------------AppUser-----------------------------------------
 
@@ -162,10 +161,28 @@ public class Query implements GraphQLQueryResolver {
 	}
 	
 	// --------------------------Music------------------------------------------
-	
-	
-	public Music getMusicBackground(String backgroundMusic){
+
+	public Music getMusic(long idMusic){
+		return MusicDao.findMusicByIdMusic(idMusic);
+	}
+
+	public boolean getExistMusic(String name){
+
+		return MusicService.findByMusicBackground(name);
+	}
+
+	public List<Music> getMusics(){return MusicService.getAll();}
+
+	public Music getMusicBackgroundByName(String backgroundMusic){
 		return MusicDao.findMusicByBackgroundMusic(backgroundMusic);
+	}
+
+	public List<Music> getMusicBackgroundByNameContaining(String backgroundMusic){
+		return MusicDao.findMusicByBackgroundMusicContaining(backgroundMusic);
+	}
+
+	public Music getMusicBackgroundInUse(){
+		return MusicDao.findMusicByInUse(1);
 	}
 	
 	// --------------------------------------------------------------------------

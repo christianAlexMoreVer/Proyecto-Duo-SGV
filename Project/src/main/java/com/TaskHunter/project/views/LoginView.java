@@ -32,8 +32,7 @@ import java.util.Objects;
 @PageTitle("Login")
 
 public class LoginView extends VerticalLayout {
-	
-	
+
 	static Boolean logged;
 
 	private final LoginForm login = new LoginForm(); 
@@ -71,7 +70,6 @@ public class LoginView extends VerticalLayout {
 			}else {
 				if(us.get().getRol() == 1) {
 					loginOverlay.setError(false);
-					System.out.println(us.get().getuserName());
 					
 					localStorage.setLogin("true");
 					// loginOverlay.getUI().ifPresent(ui -> ui.navigate("AppUserControl"));
